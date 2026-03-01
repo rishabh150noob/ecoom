@@ -1,0 +1,64 @@
+body {
+  background: #f4f6f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.chatlist-container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.chatlist-title {
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: #333;
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s ease;
+  border-bottom: 1px solid #eee;
+}
+
+.chat-item:last-child {
+  border-bottom: none;
+}
+
+.chat-item:hover {
+  background: #f1f5ff;
+  transform: translateX(5px);
+}
+
+.chat-avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-info h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.chat-info p {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.no-chat {
+  text-align: center;
+  color: #888;
+}

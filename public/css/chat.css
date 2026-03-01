@@ -1,0 +1,22 @@
+#chatBox {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.sent {
+    align-self: flex-end;
+    background-color: #d1e7dd;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 60%;
+}
+
+.received {
+    align-self: flex-start;
+    background-color: #f8d7da;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 60%;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <link rel="stylesheet" href="/css/chatlist.css">
+  <title>Your Chats</title>
+</head>
+<body>
+
+  <%- include('../partials/nav') %>
+
+  <div class="chatlist-container">
+    <h2 class="chatlist-title">Your Chats</h2>
+
+    <% if (users.length === 0) { %>
+      <p class="no-chat">No chats yet.</p>
+    <% } %>
+
+    <% users.forEach(user => { %>
+      <a href="/chat/<%= user._id %>" class="chat-item">
+        
+        <div class="chat-avatar">
+          <img src="<%= user.profileImageURL || '/images/default.png' %>" alt="profile">
+        </div>
+
+        <div class="chat-info">
+          <h4><%= user.fullName %></h4>
+          <p>Click to open conversation</p>
+        </div>
+
+      </a>
+    <% }) %>
+
+  </div>
+
+
+</body>
+</html>
