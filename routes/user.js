@@ -31,19 +31,18 @@ router.post("/signin", async (req,res)=>{
 }); 
 
 
-const storage = multer.diskStorage({
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../services/cloudinary");
 
-    destination: function( req , file , cb){
-        return cb( null , path.resolve(`./public/images`));
-    },
-
-    filename: function ( req , file , cb){
-        return cb( null , `${Date.now()}-${file.originalname}`);
-    }
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "profile_images",
+    allowed_formats: ["jpg", "png", "jpeg"],
+  },
 });
 
-//upload → The actual middleware
-const upload = multer({storage : storage});
+const upload = multer({ storage });
 
 
 router.post("/signup", upload.single("profileImageURL"),async (req,res)=>{
@@ -54,7 +53,7 @@ router.post("/signup", upload.single("profileImageURL"),async (req,res)=>{
         fullName,
         email,
         password,
-        profileImageURL:`/images/${req.file.filename}`,
+        profileImageURL:req.file.path,
     });
 
     return res.redirect("/");

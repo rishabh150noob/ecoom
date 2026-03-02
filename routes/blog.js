@@ -43,23 +43,18 @@ router.get("/:id",async(req,res)=>{
     
 });
 
-// storage = instruction manual
-//It doesn’t actually process any request yet.
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../services/cloudinary");
 
-const storage = multer.diskStorage({
-
-    destination: function( req , file , cb){
-        return cb( null , path.resolve(`./public/uploads`));
-    },
-
-    filename: function ( req , file , cb){
-        return cb( null , `${Date.now()}-${file.originalname}`);
-    }
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "blog_covers",
+    allowed_formats: ["jpg", "png", "jpeg"],
+  },
 });
 
-//upload → The actual middleware
-const upload = multer({storage : storage});
-
+const upload = multer({ storage });
 // creating a blog post
 router.post("/", upload.single("coverImage"), async (req, res) => {
 
@@ -71,7 +66,7 @@ router.post("/", upload.single("coverImage"), async (req, res) => {
     price: price ? Number(price) : null,
     category,
     createdBy: req.user._id,
-    coverImageURL: `/uploads/${req.file.filename}`,
+    coverImageURL:req.file.path,
   });
 
   return res.redirect(`/blog/${blog._id}`);
